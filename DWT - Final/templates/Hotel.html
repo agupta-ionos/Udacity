@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Restaurant Menu Fetcher</title>
+        <meta name="description" content="Restaurant">   
+    </head>
+    <style>
+    body {   color: darkblue;    background-color: silver; font-family: sans-serif;  }  a {   color: black; } a:visited {   color: darkblue; } 
+    </style> 
+    
+    <body bgcolor="#E6E6FA">
+        
+        <H1 align ="center"><font size="8" color=blue"" face="forte">Restaurant Dish Details Fetcher ! ! ! </font></H1>
+        <H3><font size="5" color="black" face="Stencil">Enter Dish or Ingredient details in the below search box : </font></H3>
+        <script>
+            window.onload = function()
+            {
+                document.getElementById("b1").addEventListener('click', UserPostAction);
+                document.getElementById("b2").addEventListener('click', UserAction);
+                
+            function UserAction() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function()
+            {
+             if(this.readyState==4 && this.status==200)
+                 {    
+                    console.log(this.responseText); 
+                    document.getElementById("demo").innerHTML = this.responseText;
+                    displayAll(this.responseText);
+                 }  
+            }
+            xhttp.open("GET", "/all", true);
+            xhttp.send();        
+                                   }
+       
+            function UserPostAction() {        
+            var postSearch = document.getElementById("inputString").value;
+            var xhttp1 = new XMLHttpRequest();
+            xhttp1.onreadystatechange = function()
+            {
+             if(this.readyState==4 && this.status==200)
+                 {   
+                    console.log(this.responseText); 
+                    display(this.responseText);
+                 }  
+            }
+            xhttp1.open("GET", "/search/"+ postSearch, true);
+            xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp1.send();            
+                                      }
+                
+            function displayAll(result)
+            {
+                var data1="";
+                var result1 = JSON.parse(result);
+                console.log(result1);
+                console.log(result1.all.length);
+                for (var i = 0; i < result1.all.length; i++)
+                    {
+                        data1 += "Restaurant ID -> "+ result1.all[i].Restaurant_id + "<br>" + "Restaurant Name -> " + result1.all[i].Restaurant_Name + "<br>" + "Dish Name -> "+ result1.all[i].Dish_name + "<br>" + "Price (In Rs.) -> " + result1.all[i].price + "<br>" + "Details -> "+ result1.all[i].Details + "<br>" + "Contact -> "+ result1.all[i].Contact + "<br>" + "Address -> "+ result1.all[i].Address + "<br>" + "Days Open -> "+ result1.all[i].Days_Open + "<br>" + "Opening Time -> "+ result1.all[i].Opening_time + "<br>" + "Closing Time -> "+ result1.all[i].Closing_time + "<br><br>";
+                    }
+                         document.getElementById("demo").innerHTML = data1;
+                
+            }    
+            
+            function display(result)
+            {
+                var data1="";
+                var result1 = JSON.parse(result);
+                console.log(result1);
+                console.log(result1.data.length);
+                for (var i = 0; i < result1.data.length; i++)
+                    {
+                        data1 += "Restaurant ID ->"+ result1.data[i].Restaurant_id + "<br>" + "Restaurant Name -> " + result1.data[i].Restaurant_Name + "<br>" + "Dish Name -> "+ result1.data[i].Dish_name + "<br>" + "Price (In Rs.) -> " + result1.data[i].price + "<br>" + "Details -> "+ result1.data[i].Details + "<br>" + "Contact -> "+ result1.data[i].Contact + "<br>" + "Address -> "+ result1.data[i].Address + "<br>" + "Days Open -> "+ result1.data[i].Days_Open + "<br>" + "Opening Time -> "+ result1.data[i].Opening_time + "<br>" + "Closing Time -> "+ result1.data[i].Closing_time + "<br><br>";
+                    }
+                         document.getElementById("demo").innerHTML = data1;
+            }
+            }                   
+        </script>   
+          
+        <form>
+            <input type="search" id="inputString" placeholder="Search the food..." aria-label="Search through site content">
+            <button type="button" id="b1"><strong>Search Specific Dish !</button>
+            <button type="button" id="b2"><strong>Search All Dishes !</button>
+        </form>
+        
+        <div id="demo"></div>
+
+
+    </body>
+    
+    
+</html>
