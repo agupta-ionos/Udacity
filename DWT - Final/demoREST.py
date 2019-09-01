@@ -4,9 +4,12 @@ from sqlalchemy import create_engine
 from json import dumps
 import os
 #anubhav
+<<<<<<< HEAD
 #ishan
 #anu
 #paurush
+=======
+>>>>>>> e8d6d3d4dd0ce7a81240362d6fa711b0a265effb
 db_connect = create_engine('sqlite:///tutorial.db')
 app = Flask(__name__)
 api = Api(app)
