@@ -11,8 +11,9 @@ pipeline {
         }
         stage('Test'){
             steps {
-                python demo.py
+                
                 input('Do you want to proceed') 
+                python demo.py
             }
         }
         stage('Deploy') {
