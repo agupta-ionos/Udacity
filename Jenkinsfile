@@ -13,7 +13,7 @@ pipeline {
             steps {
                 
                 input('Do you want to proceed') 
-                python demo.py
+                sh health.sh
             }
         }
         stage('Deploy') {
