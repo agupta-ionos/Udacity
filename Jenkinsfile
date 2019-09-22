@@ -9,5 +9,11 @@ pipeline {
                 echo 'This is Anubhav!'
             }
         }
+     stages {
+        stage('test') { 
+            steps { 
+                input('Do you want to proceed?')
+            }
+        }
     }
 }
