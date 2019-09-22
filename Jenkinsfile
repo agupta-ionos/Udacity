@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Test'){
             steps {
-                sh 'make check'
+                
                 input('Do you want to proceed') 
             }
         }
