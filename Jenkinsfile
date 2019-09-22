@@ -6,15 +6,19 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                echo 'This is Anubhav!'
+                echo 'make' 
             }
         }
-     stages {
-        stage('test') { 
-            steps { 
-                input('Do you want to proceed?')
+        stage('Test'){
+            steps {
+                sh 'make check'
+                input('Do you want to proceed') 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Anubhav publish'
             }
         }
     }
-}
 }
